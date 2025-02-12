@@ -1,1 +1,51 @@
 My Unique ID : 0a91b09c7ae52fe6c
+
+Bucket ARn 
+1.  arn:aws:s3:::data-bucket-0a91b09c7ae52fe6c
+2. arn:aws:s3:::data-bucket-1-0a91b09c7ae52fe6c
+User ARNs:
+1. arn:aws:iam::323118029092:user/mary
+2. arn:aws:iam::323118029092:user/paulo
+3. arn:aws:iam::323118029092:user/sofia
+
+
+{
+  "Id": "Policy1739345971997",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1739345853568",
+      "Action": "s3:*",
+      "Effect": "Allow",
+      "Resource": [
+          "arn:aws:s3:::data-bucket-1-0a91b09c7ae52fe6c",
+          "arn:aws:s3:::data-bucket-1-0a91b09c7ae52fe6c/*"
+          ],
+      "Condition": {
+        "ArnEquals": {
+          "aws:PrincipalArn": [
+              "arn:aws:iam::323118029092:user/sofia"
+          ]
+        }
+      },
+      "Principal": "*"
+    },
+    {
+      "Sid": "Stmt1739345968972",
+      "Action": "s3:*",
+      "Effect": "Deny",
+      "Resource": [
+          "arn:aws:s3:::data-bucket-1-0a91b09c7ae52fe6c",
+          "arn:aws:s3:::data-bucket-1-0a91b09c7ae52fe6c/*"
+          ],
+      "Condition": {
+        "ArnNotEquals": {
+          "aws:PrincipalArn": [
+              "arn:aws:iam::323118029092:user/mary"
+        ]
+        }
+      },
+      "Principal": "*"
+    }
+  ]
+}
