@@ -1,44 +1,38 @@
 {
-  "Id": "Policy1739345971997",
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "Stmt1739345853568",
-      "Action": "s3:*",
-      "Effect": "Allow",
-      "Resource": [
-          "arn:aws:s3:::data-bucket-1-0a91b09c7ae52fe6c",
-          "arn:aws:s3:::data-bucket-1-0a91b09c7ae52fe6c/*"
-          ],
-      "Condition": {
-        "ArnEquals": {
-          "aws:PrincipalArn": [
-            "arn:aws:sts::323118029092:assumed-role/voclabs/user2568966=Linet_Kendi",
-            "arn:aws:iam::323118029092:user/paulo",
-            "arn:aws:iam::323118029092:user/sofia"
-          ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::323118029092:role/voclabs",
+                    "arn:aws:iam::323118029092:user/paulo",
+                    "arn:aws:iam::323118029092:user/sofia"
+                ]
+            },
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::data-bucket-0-0a91b09c7ae52fe6c",
+                "arn:aws:s3:::data-bucket-0-0a91b09c7ae52fe6c/*"
+            ]
+        },
+        {
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::data-bucket-0-0a91b09c7ae52fe6c",
+                "arn:aws:s3:::data-bucket-0-0a91b09c7ae52fe6c/*"
+            ],
+            "Condition": {
+                "ArnNotEquals": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::323118029092:role/voclabs",
+                        "arn:aws:iam::323118029092:user/paulo",
+                        "arn:aws:iam::323118029092:user/sofia"
+                    ]
+                }
+            }
         }
-      },
-      "Principal": "*"
-    },
-    {
-      "Sid": "Stmt1739345968972",
-      "Action": "s3:*",
-      "Effect": "Deny",
-      "Resource": [
-          "arn:aws:s3:::data-bucket-1-0a91b09c7ae52fe6c",
-          "arn:aws:s3:::data-bucket-1-0a91b09c7ae52fe6c/*"
-          ],
-      "Condition": {
-        "ArnNotEquals": {
-          "aws:PrincipalArn": [
-            "arn:aws:sts::323118029092:assumed-role/voclabs/user2568966=Linet_Kendi",
-            "arn:aws:iam::323118029092:user/paulo",
-            "arn:aws:iam::323118029092:user/sofia"
-        ]
-        }
-      },
-      "Principal": "*"
-    }
-  ]
+    ]
 }
